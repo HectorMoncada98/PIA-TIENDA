@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
-const routes: Routes = [
+const routes: Routes =[
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
     path: '',
-    redirectTo: 'mainscreen',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -28,12 +27,8 @@ const routes: Routes = [
     loadChildren: () => import('./fogotpassword/fogotpassword.module').then( m => m.FogotpasswordPageModule)
   },
   {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: 'tic',
-    loadChildren: () => import('./pages/tic/tic.module').then( m => m.TicPageModule)
+    path: 'detail/:id',
+    loadChildren: () => import('./screens/detail/detail.module').then( m => m.DetailPageModule)
   },
   {
     path: 'home',
