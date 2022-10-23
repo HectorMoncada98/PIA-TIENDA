@@ -2,6 +2,7 @@ import { CartService } from './../../services/cart.service';
 import { CartItem } from './../../models/cart-item.model';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cart',
@@ -10,10 +11,38 @@ import { Observable } from 'rxjs';
 })
 export class CartPage implements OnInit {
   cartItems$: Observable<CartItem[]>;
-  constructor(private cartService: CartService) { }
+  totalAmount$: Observable<number>;
+
+  constructor(private cartService: CartService, private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.cartItems$ = this.cartService.getCart();
+    this.totalAmount$ = this.cartService.getTotalAmount();
+  }
+  onIncrease(item: CartItem) {
+    this.cartService.changeQty(1, item.id);
   }
 
+  onDecrease(item: CartItem) {
+    if (item.quantity === 1) {this.removeFromCart(item);}
+    else {this.cartService.changeQty(-1, item.id);}
+  }
+
+  async removeFromCart(item: CartItem) {
+    const alert = await this.alertCtrl.create({
+      header: 'Eliminar',
+      message: 'Estas seguro que desea eliminar?',
+      buttons: [
+        {
+          text: 'Si',
+          handler: () => this.cartService.removeItem(item.id),
+        },
+        {
+          text: 'No',
+        },
+      ],
+    });
+
+    alert.present();
+  }
 }

@@ -1,3 +1,5 @@
+import { ButtonModule } from './../../components/button/button.module';
+import { CartItemModule } from './../../components/cart-item/cart-item.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +15,9 @@ import { CartPage } from './cart.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CartPageRoutingModule
+    CartPageRoutingModule,
+    CartItemModule,
+    ButtonModule
   ],
   declarations: [CartPage]
 })
