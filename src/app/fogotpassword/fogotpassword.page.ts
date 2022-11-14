@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-fogotpassword',
   templateUrl: './fogotpassword.page.html',
   styleUrls: ['./fogotpassword.page.scss'],
 })
-export class FogotpasswordPage implements OnInit {
+export class FogotpasswordPage {
 
-  constructor() { }
+  constructor(private authSvc: AuthService, private router: Router) { }
 
-  ngOnInit() {
+ 
+
+  async onResetPassword(email){
+    try{
+        await this.authSvc.resetpassword(email.value);
+        this.router.navigate(['/login']);
+    }catch(error){
+      console.log('Error=>', error);
+    }
   }
 
 }
