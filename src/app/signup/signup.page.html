@@ -17,17 +17,14 @@
             <ion-input placeholder="Nombre completo"></ion-input>
            </ion-item>
            <ion-item>
-             <ion-input placeholder="Email"></ion-input>
+             <ion-input placeholder="Email" #email></ion-input>
            </ion-item>
            <ion-item>
-            <ion-input placeholder="Numero"></ion-input>
-          </ion-item>
-           <ion-item>
-            <ion-input placeholder="Password"></ion-input>
+            <ion-input placeholder="Password" #password></ion-input>
           </ion-item>
 
            <div class="bottom-section">
-            <ion-button (clic)="signUPUser()">Sign up</ion-button>
+            <ion-button (click)="signUPUser(email, password)" expand="block">Sign up</ion-button>
             <span>Ya tienes una cuenta? <a href="http://localhost:8100/login">Ingresa</a></span>
            </div>
         </ion-card-content>
